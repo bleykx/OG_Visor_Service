@@ -216,7 +216,7 @@ namespace OG_Visor_Service.Helpers
             }
             return rigs.Where(w => w.Farm == farm).ToList();
         }
-
+        
         public async Task AddDbApiRigByFarm(Rig rig)
         {
             Uri rigDbApiUrl = new Uri(_dbApiPath + "Rigs");
