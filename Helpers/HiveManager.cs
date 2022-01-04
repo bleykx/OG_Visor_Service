@@ -24,7 +24,7 @@ namespace OG_Visor_Service.Helpers
         private readonly ILogger<HiveManager> _logger;
         private readonly Loggerizer _loggerizer;
         //private LogContent logContent = new LogContent();
-        private readonly string _dbApiPath = "https://localhost:44320/DB_Visor_API/api/";
+        private readonly string _dbApiPath = "https://192.168.1.42:44320/DB_Visor_API/api/";
         public HiveOptions _options { get; }
         public string _hiveApiKey { get; }
 
@@ -216,7 +216,7 @@ namespace OG_Visor_Service.Helpers
             }
             return rigs.Where(w => w.Farm == farm).ToList();
         }
-
+        
         public async Task AddDbApiRigByFarm(Rig rig)
         {
             Uri rigDbApiUrl = new Uri(_dbApiPath + "Rigs");

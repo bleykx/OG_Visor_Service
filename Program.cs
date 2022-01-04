@@ -35,6 +35,12 @@ namespace OG_Visor_Service
                     services.AddHttpClient<HiveManager>();
                     services.AddHttpClient<Accountant>();
                     services.AddSingleton<Loggerizer>();
+
+                    Log.Logger = new LoggerConfiguration()
+                        .Enrich.WithProperty("AppId", 10)
+                        .WriteTo.Console()
+                        .CreateLogger();
                 });
+
     }
 }

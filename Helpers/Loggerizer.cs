@@ -25,15 +25,15 @@ namespace OG_Visor_Service.Helpers
         public Loggerizer(ILogger<Loggerizer> logger)
         {
             _logger = logger;
-            
         }
 
         public void LogAPIError(Object logContent)
         {
             //string msg = "Method " + methodName + " sending " + httpMethod + " request at " + url + " get statusCode " + statusCode + " with response " + @content;
+            LogContent log = (LogContent)logContent;
 
-            _logger.LogError(JsonConvert.SerializeObject(logContent));
-            SaveErrorInFile(JsonConvert.SerializeObject(logContent));
+            _logger.LogError(log.GetJson());
+            SaveErrorInFile(log.GetJson());
         }
 
         public void LogAPIResponse(Object logContent)
@@ -46,13 +46,15 @@ namespace OG_Visor_Service.Helpers
         public void LogAPICantConnect(Object logContent)
         {
             //string msg = $"Method: {_logContent._methodName} sending {_logContent._httpMethod} request at {_logContent._url}  can't connect. Request Exception : {_logContent._content}";
-            _logger.LogError(JsonConvert.SerializeObject(logContent));
-            SaveErrorInFile(JsonConvert.SerializeObject(logContent));
+            LogContent log = (LogContent)logContent;
+
+            _logger.LogError(log.GetJson());
+            SaveErrorInFile(log.GetJson());
         }
 
         public void SaveErrorInFile(string msg)
         {
-            string pzath = _errorPath + "Errors_" + DateTime.UtcNow.Year + DateTime.UtcNow + ".json";
+            string path = _errorPath + "Errors_" + DateTime.UtcNow.Year + DateTime.UtcNow + ".json";
             File.AppendAllText(_errorPath, msg + Environment.NewLine);
         }
 
